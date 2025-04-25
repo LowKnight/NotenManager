@@ -1,0 +1,24 @@
+import { useEffect, useState } from "react";
+import axiosClient from "../api/axiosClient";
+import { LehrerStatistikDto } from "../types/statistik";
+import BarChartCard from "../components/BarChartCard";
+
+export default function StatistikDashboard() {
+  const [statistik, setStatistik] = useState<LehrerStatistikDto | null>(null);
+
+  useEffect(() => {
+    axiosClient
+      .get("/lehrer/statistik?monat=2025-04")
+      .then((res) => setStatistik(res.data))
+      .catch((err) => console.error("Statistik-Fehler:", err));
+  }, []);
+
+  return (
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h1 className="text-2xl font-bold mb-4">Statistik – {statistik?.monat}</h1>
+      {statistik?.fachStatistik.map((fach) => (
+        <BarChartCard key={fach.fach} fach={fach} />
+      ))}
+    </div>
+  );
+}
