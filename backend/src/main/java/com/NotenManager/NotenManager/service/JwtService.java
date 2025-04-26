@@ -1,26 +1,31 @@
 package com.NotenManager.NotenManager.service;
 
-import io.jsonwebtoken.*;
+import com.NotenManager.NotenManager.config.JwtConfig;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
 
     private static final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 Stunde
-    private static final String SECRET = "supergeheimespasswort123456789012345678901234"; // min. 256 bit
+    private final JwtConfig jwtConfig;
 
     private Key getSignKey() {
-        return Keys.hmacShaKeyFor(SECRET.getBytes());
+        byte[] keyBytes = jwtConfig.getSecret().getBytes(StandardCharsets.UTF_8); // OHNE Base64!
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String generateToken(String email) {
         return Jwts.builder()
                 .setSubject(email)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
