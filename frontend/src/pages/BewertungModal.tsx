@@ -15,7 +15,7 @@ export default function BewertungModal({ schuelerId, onClose }: BewertungModalPr
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post("/api/lehrer/bewertung", {
+      await axiosClient.post("/api/lehrer/bewertung", {
         schuelerId,
         fachId,
         note,

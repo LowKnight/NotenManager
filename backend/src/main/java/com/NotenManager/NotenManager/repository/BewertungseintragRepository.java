@@ -9,8 +9,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface BewertungseintragRepository extends JpaRepository<Bewertungseintrag, Long> {
-    List<Bewertungseintrag> findAllBySchuelerAndDatumBetween(Schueler schueler, LocalDate start, LocalDate end);
-    int countByLehrerAndDatum(Lehrer lehrer, LocalDate datum);
+
+    List<Bewertungseintrag> findAllBySchuelerId(Long schuelerId);
 
     List<Bewertungseintrag> findAllByLehrerAndDatumBetween(Lehrer lehrer, LocalDate start, LocalDate end);
+
+    long countByLehrerAndDatum(Lehrer lehrer, LocalDate datum);
+
+    List<Bewertungseintrag> findAllBySchuelerAndDatumBetween(Schueler schueler, LocalDate start, LocalDate end);
 }

@@ -50,17 +50,25 @@ export default function BewertungForm({ schuelerId, onClose }: Props) {
           </select>
         </div>
 
-        <div className="space-y-1">
-          <label className="text-sm font-medium text-gray-700">Note (1–5)</label>
-          <input
-            type="number"
-            min={1}
-            max={5}
-            value={note}
-            onChange={(e) => setNote(+e.target.value)}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
-          />
-        </div>
+        <select
+          value={note}
+          onChange={(e) => setNote(Number(e.target.value))}
+          className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 transition
+            ${
+              note <= 2
+                ? "border-green-400 focus:ring-green-300"
+                : note === 3
+                ? "border-yellow-400 focus:ring-yellow-300"
+                : "border-red-400 focus:ring-red-300"
+            }
+          `}
+        >
+          {[1, 2, 3, 4, 5].map((n) => (
+            <option key={n} value={n}>
+              {n}
+            </option>
+          ))}
+        </select>
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">Kommentar</label>

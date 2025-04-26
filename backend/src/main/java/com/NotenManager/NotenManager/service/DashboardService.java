@@ -24,7 +24,7 @@ public class DashboardService {
                 .orElseThrow(() -> new UsernameNotFoundException("Lehrer nicht gefunden"));
 
         int schuelerCount = schuelerRepository.countByLehrer(lehrer);
-        int bewertungenHeute = bewertungseintragRepository.countByLehrerAndDatum(lehrer, LocalDate.now());
+        int bewertungenHeute = Math.toIntExact(bewertungseintragRepository.countByLehrerAndDatum(lehrer, LocalDate.now()));
 
         return new DashboardDto(
                 lehrer.getVorname(),

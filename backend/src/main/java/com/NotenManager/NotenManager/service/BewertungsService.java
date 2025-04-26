@@ -53,21 +53,20 @@ public class BewertungsService {
         LocalDate start = ym.atDay(1);
         LocalDate end = ym.atEndOfMonth();
 
-        return bewertungRepository.findAllBySchuelerAndDatumBetween(schueler, start, end).stream().map(b -> {
-            BewertungDto dto = new BewertungDto();
-            dto.setId(b.getId());
-            dto.setFach(b.getFach().getName());
-            dto.setNote(b.getNote());
-            dto.setKommentar(b.getKommentar());
-            dto.setDatum(b.getDatum());
-            return dto;
-        }).collect(Collectors.toList());
+        return bewertungRepository.findAllBySchuelerAndDatumBetween(schueler, start, end)
+                .stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 
     public MonatsauswertungDto getMonatsauswertung(Long schuelerId, String monat) {
         List<BewertungDto> eintraege = getMonatsbewertung(schuelerId, monat);
 
-        double durchschnitt = eintraege.stream().mapToInt(BewertungDto::getNote).average().orElse(0.0);
+        double durchschnitt = eintraege.stream()
+                .mapToInt(BewertungDto::getNote)
+                .average()
+                .orElse(0.0);
+
         int gerundet = (int) Math.round(durchschnitt);
 
         Schueler schueler = schuelerRepository.findById(schuelerId)
@@ -83,4 +82,24 @@ public class BewertungsService {
         return dto;
     }
 
+    public List<BewertungDto> getAlleBewertungen(Long schuelerId) {
+        return bewertungRepository.findAllBySchuelerId(schuelerId)
+                .stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    private BewertungDto toDto(Bewertungseintrag eintrag) {
+        BewertungDto dto = new BewertungDto();
+        dto.setId(eintrag.getId());
+        dto.setFach(eintrag.getFach().getName());
+        dto.setNote(eintrag.getNote());
+        dto.setKommentar(eintrag.getKommentar());
+        dto.setDatum(eintrag.getDatum());
+        return dto;
+    }
+
+    public void deleteBewertung(Long bewertungId) {
+        bewertungRepository.deleteById(bewertungId);
+    }
 }

@@ -4,6 +4,7 @@ import com.NotenManager.NotenManager.dto.FachStatistikDto;
 import com.NotenManager.NotenManager.dto.LehrerStatistikDto;
 import com.NotenManager.NotenManager.model.Bewertungseintrag;
 import com.NotenManager.NotenManager.model.Lehrer;
+import com.NotenManager.NotenManager.model.Schueler;
 import com.NotenManager.NotenManager.repository.BewertungseintragRepository;
 import com.NotenManager.NotenManager.repository.LehrerRepository;
 import lombok.RequiredArgsConstructor;

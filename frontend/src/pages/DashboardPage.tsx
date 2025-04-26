@@ -5,6 +5,8 @@ import SchuelerList from "../components/SchuelerList";
 import AddSchuelerForm from "../components/AddSchuelerForm";
 import BewertungForm from "../components/BewertungForm";
 import SubjectsManagement from "../components/SubjectsManagement";
+import StatistikDashboard from "../components/StatistikDashboard";
+import StudentsAverageChart from "../components/StudentsAverageChart";
 import axios from "axios";
 
 
@@ -26,10 +28,9 @@ export default function DashboardPage() {
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-5xl font-extrabold tracking-tight text-slate-800">
-            📊 Lehrer-Dashboard
+            Lehrer-Dashboard
           </h1>
           <p className="text-lg text-slate-500">
-            Modernes Bewertungssystem mit animierter Oberfläche
           </p>
         </div>
 
@@ -53,6 +54,21 @@ export default function DashboardPage() {
           <h2 className="text-xl font-semibold mb-4">Fächer verwalten</h2>
           <SubjectsManagement />
         </div>
+
+              {/* Statistikübersicht */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                {/* Statistikübersicht */}
+                <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-lg hover:shadow-indigo-200 transition-all duration-300">
+                  <h2 className="text-xl font-semibold mb-4">Statistikübersicht</h2>
+                  <StatistikDashboard schueler={schueler} />
+                </div>
+
+                {/* Durchschnittsnoten Diagramm */}
+                <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-lg hover:shadow-indigo-200 transition-all duration-300">
+                  <h2 className="text-xl font-semibold mb-4">Durchschnittsnoten Diagramm</h2>
+                  <StudentsAverageChart schueler={schueler} />
+                </div>
+              </div>
 
         {/* Bewertung Modal */}
         {ausgewaehlt && (

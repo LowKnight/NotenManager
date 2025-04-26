@@ -65,7 +65,7 @@ public class AuthService {
                 .orElseThrow(() -> new UsernameNotFoundException("Lehrer nicht gefunden"));
 
         int schuelerCount = schuelerRepository.countByLehrer(lehrer);
-        int bewertungenHeute = bewertungseintragRepository.countByLehrerAndDatum(lehrer, LocalDate.now());
+        int bewertungenHeute = (int) bewertungseintragRepository.countByLehrerAndDatum(lehrer, LocalDate.now());
 
         return new DashboardDto(
                 lehrer.getVorname(),

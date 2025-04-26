@@ -40,4 +40,17 @@ public class BewertungsController {
         return ResponseEntity.ok(service.getMonatsauswertung(schuelerId, monat));
     }
 
+    @GetMapping("/alle")
+    public ResponseEntity<List<BewertungDto>> getAlleBewertungen(
+            @RequestParam Long schuelerId
+    ) {
+        return ResponseEntity.ok(service.getAlleBewertungen(schuelerId));
+    }
+
+    @DeleteMapping("/{bewertungId}")
+    public ResponseEntity<Void> deleteBewertung(@PathVariable Long bewertungId) {
+        service.deleteBewertung(bewertungId);
+        return ResponseEntity.noContent().build();
+    }
+
 }
