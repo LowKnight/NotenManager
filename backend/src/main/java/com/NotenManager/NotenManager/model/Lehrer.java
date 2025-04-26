@@ -21,5 +21,5 @@ public class Lehrer {
     @Column(unique = true)
     private String email;
 
-    private String passwort;
+    private String password;
 }

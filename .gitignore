@@ -31,3 +31,19 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Backend ignorieren
+/backend/target/
+backend/.mvn/
+
+# Frontend ignorieren
+/frontend/node_modules/
+frontend/build/
+
+# IDE-Dateien ignorieren
+.idea/
+
+# Betriebssystem spezifisch
+.DS_Store
+Thumbs.db
+

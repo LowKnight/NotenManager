@@ -25,34 +25,41 @@ public class AuthService {
     private final SchuelerRepository schuelerRepository;
     private final BewertungseintragRepository bewertungseintragRepository;
 
-
-
     public String register(RegisterRequest request) {
         if (lehrerRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("E-Mail bereits registriert.");
         }
 
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+
         Lehrer lehrer = Lehrer.builder()
                 .vorname(request.getVorname())
                 .nachname(request.getNachname())
                 .email(request.getEmail())
-                .passwort(passwordEncoder.encode(request.getPasswort()))
+                .password(encodedPassword) // jetzt sicher verschlüsselt!
                 .build();
 
         lehrerRepository.save(lehrer);
+
         return "Registrierung erfolgreich";
     }
+
     public AuthResponse login(AuthRequest request) {
         Lehrer lehrer = lehrerRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
 
-        if (!passwordEncoder.matches(request.getPasswort(), lehrer.getPasswort())) {
+        if (lehrer.getPassword() == null || lehrer.getPassword().isBlank()) {
+            throw new RuntimeException("Benutzer hat kein gültiges Passwort gespeichert");
+        }
+
+        if (!passwordEncoder.matches(request.getPassword(), lehrer.getPassword())) {
             throw new RuntimeException("Ungültige Anmeldedaten");
         }
 
         String token = jwtService.generateToken(lehrer.getEmail());
         return new AuthResponse(token);
     }
+
     public DashboardDto getDashboardInfo(String email) {
         Lehrer lehrer = lehrerRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Lehrer nicht gefunden"));
@@ -69,5 +76,4 @@ public class AuthService {
                 bewertungenHeute
         );
     }
-
 }
