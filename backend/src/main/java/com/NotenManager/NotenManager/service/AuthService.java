@@ -9,6 +9,7 @@ import com.NotenManager.NotenManager.repository.BewertungseintragRepository;
 import com.NotenManager.NotenManager.repository.LehrerRepository;
 import com.NotenManager.NotenManager.repository.SchuelerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class AuthService {
                 .vorname(request.getVorname())
                 .nachname(request.getNachname())
                 .email(request.getEmail())
-                .password(encodedPassword) // jetzt sicher verschlüsselt!
+                .password(encodedPassword)
                 .build();
 
         lehrerRepository.save(lehrer);
@@ -46,14 +47,14 @@ public class AuthService {
 
     public AuthResponse login(AuthRequest request) {
         Lehrer lehrer = lehrerRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+                .orElseThrow(() -> new UsernameNotFoundException("Benutzer nicht gefunden"));
 
         if (lehrer.getPassword() == null || lehrer.getPassword().isBlank()) {
-            throw new RuntimeException("Benutzer hat kein gültiges Passwort gespeichert");
+            throw new BadCredentialsException("Benutzer hat kein Passwort gespeichert");
         }
 
         if (!passwordEncoder.matches(request.getPassword(), lehrer.getPassword())) {
-            throw new RuntimeException("Ungültige Anmeldedaten");
+            throw new BadCredentialsException("Passwort falsch");
         }
 
         String token = jwtService.generateToken(lehrer.getEmail());
