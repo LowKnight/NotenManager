@@ -1,4 +1,3 @@
-// src/components/BarChartCard.tsx
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { FachStatistikDto } from "../types/statistik";
 

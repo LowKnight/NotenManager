@@ -24,6 +24,15 @@ public class BewertungsController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/multi")
+    public ResponseEntity<Void> mehrereBewertungenEintragen(
+            @RequestBody List<BewertungRequest> requests,
+            Authentication authentication
+    ) {
+        service.mehrereEintraegeSpeichern(requests, authentication);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping
     public ResponseEntity<List<BewertungDto>> getBewertungen(
             @RequestParam Long schuelerId,

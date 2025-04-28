@@ -102,4 +102,10 @@ public class BewertungsService {
     public void deleteBewertung(Long bewertungId) {
         bewertungRepository.deleteById(bewertungId);
     }
+
+    public void mehrereEintraegeSpeichern(List<BewertungRequest> requests, Authentication authentication) {
+        for (BewertungRequest request : requests) {
+            eintragSpeichern(request, authentication);
+        }
+    }
 }
