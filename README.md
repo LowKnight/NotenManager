@@ -1,78 +1,133 @@
-Welcome!
-Ein Webprojekt zur Verwaltung von Schülernoten für Volksschullehrer.
+# NotenManager
+
+**Welcome!**  
+Ein Webprojekt zur Verwaltung von Schülernoten für Volksschullehrer.  
 Lehrer können täglich Bewertungen zu einzelnen Fächern und Schülern eintragen, Monatsauswertungen abrufen und eigene Statistiken einsehen.
 
-Features:
-Registrierung & Login mit sicherem JWT-Token-Handling
-Schülerverwaltung: Anlegen, Bearbeiten, Löschen von Schülern
-Fächerverwaltung: Anlegen und Löschen von Unterrichtsfächern
-Bewertungssystem: Tägliche Noten- und Kommentarerfassung
-Monatsauswertung: Durchschnittsnoten & Gesamtnoten je Schüler
-Lehrerstatistiken: Fachspezifische Auswertungen mit Notenverteilungen
-Responsives modernes Frontend (getrenntes Projekt)
-REST-API nach Best Practices entwickelt
+---
 
-Verwendete Technologien 
+## ✨ Live-Demo
 
-Backend:
-Java 21
-Spring Boot 3
-Spring Security (JWT-Authentifizierung)
-Spring Data JPA (Datenbankzugriff)
-Lombok (Code-Reduzierung)
-PostgreSQL / MySQL (flexibel einsetzbar)
-Maven (Build-Management)
+**Backend**: [Hier klicken](https://backend-service-eidm.onrender.com)
+**Frontend**: [Hier klicken](https://notenmanager.onrender.com)
 
-Frontend:
-TypeScript
-React.js
-Tailwind CSS (modernes UI)
-Sonstiges:
-Docker-Containerisierung möglich
-OpenAPI / Swagger Dokumentation (optional integrierbar)
 
-Setup-Anleitung:
-Voraussetzungen:
-Java 21 installiert
-Maven installiert
-PostgreSQL oder MySQL Datenbank aufgesetzt (Datenbankname z. B. notenmanager)
-Optional: Docker Desktop (für Containerisierung)
+---
 
-1. Projekt klonen
+## 🚀 Features
 
-git clone https://github.com/dein-github-username/notenmanager.git
-cd notenmanager
+- **Registrierung & Login** mit sicherem JWT-Token-Handling
+- **Schülerverwaltung**: Anlegen, Bearbeiten und Löschen von Schülern
+- **Fächerverwaltung**: Anlegen und Löschen von Unterrichtsfächern
+- **Bewertungssystem**: Tägliche Noten- und Kommentarerfassung
+- **Monatsauswertung**: Durchschnittsnoten & Gesamtnoten je Schüler
+- **Lehrerstatistiken**: Fachspezifische Auswertungen mit Notenverteilungen
+- **Responsives modernes Frontend** (eigenständiges Projekt)
+- **REST-API** nach Best Practices entwickelt
 
-2. Datenbank konfigurieren
-In der Datei application.properties:
+---
 
+## ⚙️ Verwendete Technologien
+
+**Backend:**
+
+- Java 21
+- Spring Boot 3
+- Spring Security (JWT-Authentifizierung)
+- Spring Data JPA (Datenbankzugriff)
+- Lombok (Code-Reduzierung)
+- PostgreSQL / MySQL (flexibel)
+- Maven (Build-Management)
+
+**Frontend:**
+
+- TypeScript
+- React.js
+- Tailwind CSS (modernes UI)
+
+**Weitere Tools:**
+
+- Docker-Containerisierung möglich
+- OpenAPI / Swagger-Dokumentation (optional)
+
+---
+
+## 🛠️ Setup-Anleitung (lokale Entwicklung)
+
+### Voraussetzungen
+
+- Java 21 installiert
+- Maven installiert
+- PostgreSQL oder MySQL-Datenbank aufgesetzt (z.\u202fB. Datenbankname: `notenmanager`)
+- Optional: Docker Desktop (für Containerisierung)
+
+### Projekt klonen
+
+```bash
+git clone https://github.com/LowKnight/NotenManager.git
+cd NotenManager
+```
+
+### Backend konfigurieren
+
+In der Datei `src/main/resources/application.properties`:
+
+```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/notenmanager
 spring.datasource.username=dein_db_username
 spring.datasource.password=dein_db_passwort
 
 jwt.secret=dein_secret
 spring.jpa.hibernate.ddl-auto=update
-(Hinweis: Für MySQL bitte den JDBC-URL und Treiber anpassen.)
+```
 
-3. Backend starten
+*(Hinweis: Für MySQL bitte den JDBC-URL und Treiber anpassen.)*
+
+### Backend starten
+
+```bash
 ./mvnw spring-boot:run
+```
 oder
-mvn spring-boot:run
 
-4. Frontend starten:
+```bash
+mvn spring-boot:run
+```
+
+### Frontend starten
+
+```bash
 cd frontend
 npm install
 npm run dev
-Frontend läuft dann standardmäßig auf:
+```
+
+Das Frontend läuft dann standardmäßig auf:  
 http://localhost:3000
 
-API-Endpunkte:
+---
 
-HTTP Methode	Pfad	Beschreibung
-POST	/api/auth/register	Registrierung neuer Lehrer
-POST	/api/auth/login	Login & Token erhalten
-GET	/api/lehrer/dashboard	Dashboard-Daten des Lehrers
-POST	/api/lehrer/schueler	Schüler anlegen
-POST	/api/lehrer/faecher	Fach anlegen
-POST	/api/lehrer/bewertung	Bewertung speichern
-GET	/api/lehrer/statistik	Lehrerstatistik abrufen
+## 📚 API-Endpunkte
+
+| HTTP Methode | Pfad                      | Beschreibung                             |
+|--------------|----------------------------|------------------------------------------|
+| POST         | `/api/auth/register`       | Registrierung neuer Lehrer              |
+| POST         | `/api/auth/login`           | Login & Token erhalten                  |
+| GET          | `/api/lehrer/dashboard`     | Dashboard-Daten des Lehrers abrufen      |
+| POST         | `/api/lehrer/schueler`      | Schüler anlegen                         |
+| POST         | `/api/lehrer/faecher`       | Fach anlegen                             |
+| POST         | `/api/lehrer/bewertung`     | Bewertung speichern                      |
+| GET          | `/api/lehrer/statistik`     | Lehrerstatistik abrufen                  |
+
+---
+
+# 📌 Hinweise
+
+- Dieses Repository enthält **nur das Backend-Projekt**.  
+  Das Frontend befindet sich im separaten Verzeichnis `frontend/`.
+
+- Für die produktive Version auf Render sind kleine Anpassungen an den Umgebungsvariablen notwendig (z.\u202fB. Secrets und Datenbank-URLs).
+
+---
+
+**Viel Spaß beim Ausprobieren!**
