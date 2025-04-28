@@ -111,6 +111,14 @@ export default function DashboardPage() {
           ))}
         </div>
 
+        {schueler.map((s) => (
+          <div key={s.id} className="bg-white rounded-3xl p-6 mb-10 shadow-md border border-slate-200">
+            <h2 className="text-3xl font-bold mb-6 text-center">{s.vorname} {s.nachname}</h2>
+            <StudentsSubjectsChart schuelerId={s.id} />
+          </div>
+        ))}
+
+
         {/* Einzelbewertung Modal */}
         {ausgewaehlt && (
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
