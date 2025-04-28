@@ -12,21 +12,22 @@ const StudentsManagement = () => {
   const [newStudent, setNewStudent] = useState("");
 
   useEffect(() => {
-    axios.get("http://`${process.env.REACT_APP_API_URL}/api/students")
+    axios.get(`${process.env.REACT_APP_API_URL}/api/students"`)
       .then(response => setStudents(response.data))
       .catch(error => console.log(error));
   }, []);
 
   const handleAddStudent = () => {
-    axios.post("http://`${process.env.REACT_APP_API_URL}/api/students", { name: newStudent })
+    axios.post(`${process.env.REACT_APP_API_URL}/api/students", { name: newStudent }`)
       .then(response => setStudents([...students, response.data]))
       .catch(error => console.log(error));
   };
 
   const handleDeleteStudent = (id: number) => {
-    axios.delete(`http://`${process.env.REACT_APP_API_URL}/api/students/${id}`)
+    axios.delete(`${process.env.REACT_APP_API_URL}/api/students/${id}`)
       .then(() => setStudents(students.filter(student => student.id !== id)))
       .catch(error => console.log(error));
+
   };
 
   return (

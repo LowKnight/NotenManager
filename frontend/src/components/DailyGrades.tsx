@@ -23,7 +23,7 @@ const DailyGrades = () => {
 
   // Alle Schüler laden
   useEffect(() => {
-    axios.get("http://`${process.env.REACT_APP_API_URL}/api/students")
+    axios.get(`${process.env.REACT_APP_API_URL}/api/students`)
       .then(response => setStudents(response.data))
       .catch(error => console.log(error));
   }, []);
@@ -31,7 +31,7 @@ const DailyGrades = () => {
   // Noten für einen Schüler laden
   useEffect(() => {
     if (selectedStudent !== null) {
-      axios.get(`http://`${process.env.REACT_APP_API_URL}/api/grades/${selectedStudent}`)
+      axios.get(`${process.env.REACT_APP_API_URL}/api/grades/${selectedStudent}`)
         .then(response => setGrades(response.data))
         .catch(error => console.log(error));
     }
@@ -39,7 +39,7 @@ const DailyGrades = () => {
 
   const handleSubmitGrade = () => {
     if (selectedStudent !== null && newGrade !== "") {
-      axios.post("http://`${process.env.REACT_APP_API_URL}/api/grades", {
+      axios.post(`${process.env.REACT_APP_API_URL}/api/grades`, {
         studentId: selectedStudent,
         subject: "Mathematik", // Beispiel: Setze hier das ausgewählte Fach
         grade: newGrade,
