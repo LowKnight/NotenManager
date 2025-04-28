@@ -9,7 +9,7 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axiosClient.post("/auth/login", {
+      const response = await axiosClient.post("/api/auth/login", {
         email: email,
         password: password,
       });
