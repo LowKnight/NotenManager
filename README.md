@@ -121,13 +121,6 @@ http://localhost:3000
 
 ---
 
-# 📌 Hinweise
-
-- Dieses Repository enthält **nur das Backend-Projekt**.  
-  Das Frontend befindet sich im separaten Verzeichnis `frontend/`.
-
-- Für die produktive Version auf Render sind kleine Anpassungen an den Umgebungsvariablen notwendig (z.\u202fB. Secrets und Datenbank-URLs).
-
 ---
 
 **Viel Spaß beim Ausprobieren!**
