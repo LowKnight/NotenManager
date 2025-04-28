@@ -12,19 +12,19 @@ const StudentsManagement = () => {
   const [newStudent, setNewStudent] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/students")
+    axios.get("http://`${process.env.REACT_APP_API_URL}/api/students")
       .then(response => setStudents(response.data))
       .catch(error => console.log(error));
   }, []);
 
   const handleAddStudent = () => {
-    axios.post("http://localhost:8080/api/students", { name: newStudent })
+    axios.post("http://`${process.env.REACT_APP_API_URL}/api/students", { name: newStudent })
       .then(response => setStudents([...students, response.data]))
       .catch(error => console.log(error));
   };
 
   const handleDeleteStudent = (id: number) => {
-    axios.delete(`http://localhost:8080/api/students/${id}`)
+    axios.delete(`http://`${process.env.REACT_APP_API_URL}/api/students/${id}`)
       .then(() => setStudents(students.filter(student => student.id !== id)))
       .catch(error => console.log(error));
   };
