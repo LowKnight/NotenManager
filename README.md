@@ -6,14 +6,6 @@ Lehrer können täglich Bewertungen zu einzelnen Fächern und Schülern eintrage
 
 ---
 
-## ✨ Live-Demo
-
-**Backend**: [Hier klicken](https://backend-service-eidm.onrender.com)
-**Frontend**: [Hier klicken](https://notenmanager.onrender.com)
-
-
----
-
 ## 🚀 Features
 
 - **Registrierung & Login** mit sicherem JWT-Token-Handling
