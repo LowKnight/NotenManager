@@ -123,4 +123,14 @@ http://localhost:3000
 
 ---
 
-**Viel Spaß beim Ausprobieren!**
+**Screenshots:**
+
+![image](https://github.com/user-attachments/assets/01d492ab-5c55-46fc-8d25-8d955c61c545)
+
+![image](https://github.com/user-attachments/assets/860e4c09-0fd3-47bb-bd52-98affc77ae5e)
+
+![image](https://github.com/user-attachments/assets/98823808-d8e7-41e7-ad21-ccda2f0f700a)
+
+![image](https://github.com/user-attachments/assets/a08d58af-0c87-4ceb-83d2-26e5ef57b166)
+
+
